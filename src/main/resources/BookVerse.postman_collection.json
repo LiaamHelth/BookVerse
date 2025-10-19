@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "dfbbaddf-0c20-4039-8c78-63f5bff0157d",
+		"name": "BookVerse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49378818",
+		"_collection_link": "https://liaamhelth-3120412.postman.co/workspace/Jero's-Workspace~2e66e5c4-0af0-461c-8901-0dc83433afb9/collection/49378818-dfbbaddf-0c20-4039-8c78-63f5bff0157d?action=share&source=collection_link&creator=49378818"
+	},
+	"item": [
+		{
+			"name": "Saludo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/prog3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"prog3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
