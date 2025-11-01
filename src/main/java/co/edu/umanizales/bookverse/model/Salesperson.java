@@ -17,13 +17,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Salesperson extends Employee {
     
-    private Double commissionPerSale;
-    private Integer salesCompleted;
+    private double commissionPerSale;
+    private int salesCompleted;
     private String assignedZone;
     
     public Salesperson(String id, String name, String lastName, String email, String phone,
-                   LocalDate hireDate, Double baseSalary, String position,
-                   Double commissionPerSale, Integer salesCompleted, String assignedZone) {
+                   LocalDate hireDate, double baseSalary, String position,
+                   double commissionPerSale, int salesCompleted, String assignedZone) {
         super(id, name, lastName, email, phone, hireDate, baseSalary, position);
         this.commissionPerSale = commissionPerSale;
         this.salesCompleted = salesCompleted;
@@ -31,7 +31,7 @@ public class Salesperson extends Employee {
     }
     
     @Override
-    public Double calculateSalary() {
+    public double calculateSalary() {
         // Base salary + commission for each sale completed
         return getBaseSalary() + (commissionPerSale * salesCompleted);
     }
@@ -59,7 +59,7 @@ public class Salesperson extends Employee {
     /**
      * Gets the total commission earned
      */
-    public Double getTotalCommission() {
+    public double getTotalCommission() {
         return commissionPerSale * salesCompleted;
     }
 }

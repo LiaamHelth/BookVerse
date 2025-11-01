@@ -21,14 +21,14 @@ public abstract class Employee implements Exportable, Notificable {
     private String email;
     private String phone;
     private LocalDate hireDate;
-    private Double baseSalary;
+    private double baseSalary;
     private String position;
     
     /**
      * Abstract method to calculate salary
      * Each subclass must implement its own calculation logic
      */
-    public abstract Double calculateSalary();
+    public abstract double calculateSalary();
     
     /**
      * Abstract method to get employee role description

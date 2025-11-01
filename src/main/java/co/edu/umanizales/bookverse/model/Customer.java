@@ -24,10 +24,10 @@ public class Customer implements Exportable, Notificable {
     private String address;
     private LocalDate registrationDate;
     private List<String> orderHistory;
-    private Boolean active;
+    private boolean active;
     
     public Customer(String id, String name, String lastName, String email, String phone, 
-                  String address, LocalDate registrationDate, Boolean active) {
+                  String address, LocalDate registrationDate, boolean active) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -72,7 +72,7 @@ public class Customer implements Exportable, Notificable {
     }
     
     /**
-     * Adds a new order to the purchase history
+     * Adds a new order to the purchase history using order ID
      */
     public void addOrder(String orderId) {
         if (this.orderHistory == null) {
@@ -82,9 +82,28 @@ public class Customer implements Exportable, Notificable {
     }
     
     /**
+     * Adds a new order to the purchase history using Order object
+     */
+    public void addOrder(Order order) {
+        if (order != null && order.getId() != null) {
+            addOrder(order.getId());
+        }
+    }
+    
+    /**
+     * Removes an order from the purchase history
+     */
+    public boolean removeOrder(String orderId) {
+        if (this.orderHistory == null) {
+            return false;
+        }
+        return this.orderHistory.remove(orderId);
+    }
+    
+    /**
      * Gets the total number of orders made by the customer
      */
-    public Integer getTotalOrders() {
+    public int getTotalOrders() {
         return orderHistory != null ? orderHistory.size() : 0;
     }
     

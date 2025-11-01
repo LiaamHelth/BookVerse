@@ -46,9 +46,9 @@ public class Author implements Exportable {
     /**
      * Calculates the age of the author
      */
-    public Integer calculateAge() {
+    public int calculateAge() {
         if (birthDate == null) {
-            return null;
+            return 0;
         }
         return LocalDate.now().getYear() - birthDate.getYear();
     }

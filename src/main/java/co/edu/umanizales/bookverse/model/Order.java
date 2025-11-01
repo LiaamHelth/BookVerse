@@ -13,26 +13,28 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Order implements Exportable {
     
     private String id;
-    private String customerId;
-    private String salespersonId;
+    private Customer customer;
+    private Salesperson salesperson;
     private LocalDateTime orderDate;
     private List<OrderItem> items;
-    private Double subtotal;
-    private Double taxes;
-    private Double total;
+    private double subtotal;
+    private double taxes;
+    private double total;
     private PaymentMethod paymentMethod;
     private String status;
     private String shippingAddress;
     
-    public Order(String id, String customerId, String salespersonId, LocalDateTime orderDate,
+    /**
+     * Main constructor with object references
+     */
+    public Order(String id, Customer customer, Salesperson salesperson, LocalDateTime orderDate,
                  PaymentMethod paymentMethod, String status, String shippingAddress) {
         this.id = id;
-        this.customerId = customerId;
-        this.salespersonId = salespersonId;
+        this.customer = customer;
+        this.salesperson = salesperson;
         this.orderDate = orderDate;
         this.items = new ArrayList<>();
         this.subtotal = 0.0;
@@ -41,6 +43,42 @@ public class Order implements Exportable {
         this.paymentMethod = paymentMethod;
         this.status = status;
         this.shippingAddress = shippingAddress;
+    }
+    
+    /**
+     * Backward-compatible constructor with String IDs
+     * @deprecated Use constructor with Customer and Salesperson objects instead
+     */
+    @Deprecated
+    public Order(String id, String customerId, String salespersonId, LocalDateTime orderDate,
+                 PaymentMethod paymentMethod, String status, String shippingAddress) {
+        this.id = id;
+        this.customer = new Customer();
+        this.customer.setId(customerId);
+        this.salesperson = new Salesperson();
+        this.salesperson.setId(salespersonId);
+        this.orderDate = orderDate;
+        this.items = new ArrayList<>();
+        this.subtotal = 0.0;
+        this.taxes = 0.0;
+        this.total = 0.0;
+        this.paymentMethod = paymentMethod;
+        this.status = status;
+        this.shippingAddress = shippingAddress;
+    }
+    
+    /**
+     * Gets the customer ID for backward compatibility
+     */
+    public String getCustomerId() {
+        return customer != null ? customer.getId() : null;
+    }
+    
+    /**
+     * Gets the salesperson ID for backward compatibility
+     */
+    public String getSalespersonId() {
+        return salesperson != null ? salesperson.getId() : null;
     }
     
     @Override
@@ -52,7 +90,7 @@ public class Order implements Exportable {
                 .reduce((a, b) -> a + ";" + b)
                 .orElse("") + "\"" : "";
         return String.format("%s,%s,%s,%s,%s,%.2f,%.2f,%.2f,%s,%s,%s",
-            id, customerId, salespersonId, orderDate, itemsStr, 
+            id, getCustomerId(), getSalespersonId(), orderDate, itemsStr, 
             subtotal, taxes, total, paymentMethod, status, shippingAddress);
     }
     
@@ -108,7 +146,7 @@ public class Order implements Exportable {
     /**
      * Gets the total number of items in the order
      */
-    public Integer getTotalItemCount() {
+    public int getTotalItemCount() {
         return items != null ? items.stream()
             .mapToInt(OrderItem::getQuantity)
             .sum() : 0;
@@ -126,22 +164,70 @@ public class Order implements Exportable {
      * Converts the order to a PurchaseHistory record
      */
     public PurchaseHistory toPurchaseHistory() {
-        return new PurchaseHistory(id, customerId, orderDate, total, paymentMethod, status);
+        return new PurchaseHistory(id, getCustomerId(), orderDate, total, paymentMethod, status);
     }
     
     /**
-     * Inner class representing an order item
+     * Gets the customer name for display
+     */
+    public String getCustomerName() {
+        return customer != null ? customer.getFullName() : "Unknown";
+    }
+    
+    /**
+     * Gets the salesperson name for display
+     */
+    public String getSalespersonName() {
+        return salesperson != null ? salesperson.getFullName() : "Unknown";
+    }
+    
+    /**
+     * Inner class representing an order item with proper Book reference
      */
     @Data
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class OrderItem {
-        private String bookId;
-        private String bookTitle;
-        private Integer quantity;
-        private Double unitPrice;
+        private Book book;
+        private int quantity;
+        private double unitPrice;
         
-        public Double calculateSubtotal() {
+        /**
+         * Main constructor with Book object
+         */
+        public OrderItem(Book book, int quantity, double unitPrice) {
+            this.book = book;
+            this.quantity = quantity;
+            this.unitPrice = unitPrice;
+        }
+        
+        /**
+         * Backward-compatible constructor with String bookId
+         * @deprecated Use constructor with Book object instead
+         */
+        @Deprecated
+        public OrderItem(String bookId, String bookTitle, int quantity, double unitPrice) {
+            this.book = new Book();
+            this.book.setId(bookId);
+            this.book.setTitle(bookTitle);
+            this.quantity = quantity;
+            this.unitPrice = unitPrice;
+        }
+        
+        /**
+         * Gets the book ID for backward compatibility
+         */
+        public String getBookId() {
+            return book != null ? book.getId() : null;
+        }
+        
+        /**
+         * Gets the book title for backward compatibility
+         */
+        public String getBookTitle() {
+            return book != null ? book.getTitle() : null;
+        }
+        
+        public double calculateSubtotal() {
             return quantity * unitPrice;
         }
     }

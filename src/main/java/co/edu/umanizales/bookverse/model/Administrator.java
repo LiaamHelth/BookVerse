@@ -22,11 +22,11 @@ public class Administrator extends Employee {
     private String accessLevel;
     private List<String> permissions;
     private String department;
-    private Double annualBonus;
+    private double annualBonus;
     
     public Administrator(String id, String name, String lastName, String email, String phone,
-                        LocalDate hireDate, Double baseSalary, String position,
-                        String accessLevel, List<String> permissions, String department, Double annualBonus) {
+                        LocalDate hireDate, double baseSalary, String position,
+                        String accessLevel, List<String> permissions, String department, double annualBonus) {
         super(id, name, lastName, email, phone, hireDate, baseSalary, position);
         this.accessLevel = accessLevel;
         this.permissions = permissions != null ? permissions : new ArrayList<>();
@@ -35,7 +35,7 @@ public class Administrator extends Employee {
     }
     
     @Override
-    public Double calculateSalary() {
+    public double calculateSalary() {
         // Base salary + annual bonus prorated monthly
         return getBaseSalary() + (annualBonus / 12);
     }

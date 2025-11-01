@@ -11,28 +11,84 @@ import java.time.LocalDate;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Book implements Exportable {
     
     private String id;
     private String isbn;
     private String title;
-    private String authorId;
+    private Author author;
     private String publisher;
     private LocalDate publicationDate;
     private String genre;
-    private Integer pageCount;
-    private Double price;
-    private Integer stock;
+    private int pageCount;
+    private double price;
+    private int stock;
     private String description;
     private String language;
+    
+    /**
+     * Main constructor with Author object
+     */
+    public Book(String id, String isbn, String title, Author author, String publisher, 
+                LocalDate publicationDate, String genre, int pageCount, double price, 
+                int stock, String description, String language) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.genre = genre;
+        this.pageCount = pageCount;
+        this.price = price;
+        this.stock = stock;
+        this.description = description;
+        this.language = language;
+    }
+    
+    /**
+     * Backward-compatible constructor with String authorId
+     * @deprecated Use constructor with Author object instead
+     */
+    @Deprecated
+    public Book(String id, String isbn, String title, String authorId, String publisher, 
+                LocalDate publicationDate, String genre, int pageCount, double price, 
+                int stock, String description, String language) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = new Author();
+        this.author.setId(authorId);
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.genre = genre;
+        this.pageCount = pageCount;
+        this.price = price;
+        this.stock = stock;
+        this.description = description;
+        this.language = language;
+    }
+    
+    /**
+     * Gets the author ID for backward compatibility
+     */
+    public String getAuthorId() {
+        return author != null ? author.getId() : null;
+    }
+    
+    /**
+     * Gets the author name for display
+     */
+    public String getAuthorName() {
+        return author != null ? author.getFullName() : "Unknown";
+    }
     
     @Override
     public String toCsv() {
         String escapedDescription = description != null ? 
             "\"" + description.replace("\"", "\"\"") + "\"" : "";
         return String.format("%s,%s,%s,%s,%s,%s,%s,%d,%.2f,%d,%s,%s",
-            id, isbn, title, authorId, publisher, publicationDate, 
+            id, isbn, title, getAuthorId(), publisher, publicationDate, 
             genre, pageCount, price, stock, escapedDescription, language);
     }
     
@@ -45,14 +101,14 @@ public class Book implements Exportable {
      * Checks if the book is available in stock
      */
     public boolean isAvailable() {
-        return stock != null && stock > 0;
+        return stock > 0;
     }
     
     /**
      * Decreases the stock by the specified quantity
      */
-    public boolean reduceStock(Integer quantity) {
-        if (stock != null && stock >= quantity) {
+    public boolean reduceStock(int quantity) {
+        if (stock >= quantity) {
             stock -= quantity;
             return true;
         }
@@ -62,19 +118,16 @@ public class Book implements Exportable {
     /**
      * Increases the stock by the specified quantity
      */
-    public void increaseStock(Integer quantity) {
-        if (stock == null) {
-            stock = 0;
-        }
+    public void increaseStock(int quantity) {
         stock += quantity;
     }
     
     /**
      * Calculates the age of the book in years
      */
-    public Integer calculateAge() {
+    public int calculateAge() {
         if (publicationDate == null) {
-            return null;
+            return 0;
         }
         return LocalDate.now().getYear() - publicationDate.getYear();
     }

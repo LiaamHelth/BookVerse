@@ -10,7 +10,7 @@ public record PurchaseHistory(
     String orderId,
     String customerId,
     LocalDateTime purchaseDate,
-    Double totalAmount,
+    double totalAmount,
     PaymentMethod paymentMethod,
     String status
 ) {
@@ -25,7 +25,7 @@ public record PurchaseHistory(
         if (customerId == null || customerId.isBlank()) {
             throw new IllegalArgumentException("Customer ID cannot be empty");
         }
-        if (totalAmount == null || totalAmount < 0) {
+        if (totalAmount < 0) {
             throw new IllegalArgumentException("Total amount must be greater than or equal to zero");
         }
         if (paymentMethod == null) {
