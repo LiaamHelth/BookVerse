@@ -13,48 +13,48 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Empleado implements Exportable, Notificable {
+public abstract class Employee implements Exportable, Notificable {
     
     private String id;
-    private String nombre;
-    private String apellido;
+    private String name;
+    private String lastName;
     private String email;
-    private String telefono;
-    private LocalDate fechaContratacion;
-    private Double salarioBase;
-    private String cargo;
+    private String phone;
+    private LocalDate hireDate;
+    private Double baseSalary;
+    private String position;
     
     /**
      * Abstract method to calculate salary
      * Each subclass must implement its own calculation logic
      */
-    public abstract Double calcularSalario();
+    public abstract Double calculateSalary();
     
     /**
      * Abstract method to get employee role description
      */
-    public abstract String obtenerRol();
+    public abstract String getRole();
     
     @Override
-    public void enviarNotificacion(String mensaje) {
-        System.out.println(String.format("Notificación para %s %s (%s): %s", 
-            nombre, apellido, email, mensaje));
+    public void sendNotification(String message) {
+        System.out.println(String.format("Notification for %s %s (%s): %s", 
+            name, lastName, email, message));
     }
     
     @Override
-    public String getContactoNotificacion() {
+    public String getNotificationContact() {
         return email;
     }
     
     @Override
     public String getCsvHeader() {
-        return "id,nombre,apellido,email,telefono,fechaContratacion,salarioBase,cargo,tipo";
+        return "id,name,lastName,email,phone,hireDate,baseSalary,position,type";
     }
     
     /**
      * Gets the full name of the employee
      */
-    public String getNombreCompleto() {
-        return nombre + " " + apellido;
+    public String getFullName() {
+        return name + " " + lastName;
     }
 }

@@ -49,26 +49,26 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- OpenCSV para manejo de archivos CSV -->
+		<!-- OpenCSV for CSV file handling -->
 		<dependency>
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>${opencsv.version}</version>
 		</dependency>
 
-		<!-- Logging con SLF4J -->
+		<!-- Logging with SLF4J -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 
-		<!-- Validación de datos -->
+		<!-- Data validation -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!-- Utilidades de Apache Commons -->
+		<!-- Apache Commons utilities -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

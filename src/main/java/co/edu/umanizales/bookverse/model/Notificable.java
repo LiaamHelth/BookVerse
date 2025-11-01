@@ -7,13 +7,13 @@ public interface Notificable {
     
     /**
      * Sends a notification to the entity
-     * @param mensaje The notification message
+     * @param message The notification message
      */
-    void enviarNotificacion(String mensaje);
+    void sendNotification(String message);
     
     /**
      * Gets the notification contact information
      * @return Contact information for notifications
      */
-    String getContactoNotificacion();
+    String getNotificationContact();
 }

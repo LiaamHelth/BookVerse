@@ -4,38 +4,38 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Interfaz genérica para operaciones CRUD básicas
- * @param <T> Tipo de la entidad
- * @param <ID> Tipo del ID de la entidad
+ * Generic interface for basic CRUD operations
+ * @param <T> Entity type
+ * @param <ID> Entity ID type
  */
 public interface IRepository<T, ID> {
     /**
-     * Obtiene todos los elementos
+     * Gets all elements
      */
     List<T> findAll();
     
     /**
-     * Busca un elemento por su ID
+     * Finds an element by its ID
      */
     Optional<T> findById(ID id);
     
     /**
-     * Guarda un elemento (crea o actualiza)
+     * Saves an element (creates or updates)
      */
     T save(T entity);
     
     /**
-     * Elimina un elemento por su ID
+     * Deletes an element by its ID
      */
     void deleteById(ID id);
     
     /**
-     * Verifica si existe un elemento con el ID dado
+     * Checks if an element exists with the given ID
      */
     boolean existsById(ID id);
     
     /**
-     * Cuenta el número total de elementos
+     * Counts the total number of elements
      */
     long count();
 }
