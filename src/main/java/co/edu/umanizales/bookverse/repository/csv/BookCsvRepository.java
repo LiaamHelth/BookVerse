@@ -225,7 +225,7 @@ public class BookCsvRepository implements IBookRepository {
             book.getPublicationDate() != null ? book.getPublicationDate().toString() : "",
             escapeCsv(book.getGenre()),
             String.valueOf(book.getPageCount()),
-            String.format("%.2f", book.getPrice()),
+            String.format(java.util.Locale.US, "%.2f", book.getPrice()),
             String.valueOf(book.getStock()),
             description,
             escapeCsv(book.getLanguage())

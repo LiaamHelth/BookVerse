@@ -3,6 +3,8 @@ package co.edu.umanizales.bookverse.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.time.LocalDate;
 
@@ -13,6 +15,11 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Administrator.class, name = "Administrator"),
+    @JsonSubTypes.Type(value = Salesperson.class, name = "Salesperson")
+})
 public abstract class Employee implements Exportable, Notificable {
     
     private String id;

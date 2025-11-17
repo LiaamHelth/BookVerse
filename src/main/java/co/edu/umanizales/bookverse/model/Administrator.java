@@ -48,7 +48,7 @@ public class Administrator extends Employee {
     @Override
     public String toCsv() {
         String permissionsStr = permissions != null ? String.join(";", permissions) : "";
-        return String.format("%s,%s,%s,%s,%s,%s,%.2f,%s,Administrator,%s,\"%s\",%s,%.2f",
+        return String.format(java.util.Locale.US, "%s,%s,%s,%s,%s,%s,%.2f,%s,Administrator,%s,\"%s\",%s,%.2f",
             getId(), getName(), getLastName(), getEmail(), getPhone(),
             getHireDate(), getBaseSalary(), getPosition(),
             accessLevel, permissionsStr, department, annualBonus);

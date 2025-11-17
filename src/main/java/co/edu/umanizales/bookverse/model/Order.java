@@ -3,6 +3,8 @@ package co.edu.umanizales.bookverse.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,8 +19,11 @@ public class Order implements Exportable {
     
     private String id;
     private Customer customer;
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
     private Salesperson salesperson;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime orderDate;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<OrderItem> items;
     private double subtotal;
     private double taxes;

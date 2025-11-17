@@ -8,32 +8,6 @@
 	},
 	"item": [
 		{
-			"name": "Saludo",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/prog3",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"prog3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Pruebas",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
 			"name": "Autores",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -51,14 +25,317 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/autores",
+					"raw": "localhost:8080/api/authors",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
-						"autores"
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear autor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Diana\",\r\n  \"lastName\": \"Wong\",\r\n  \"nationality\": \"Mexicana\",\r\n  \"birthDate\": \"1994-10-20\",\r\n  \"biography\": \"Creadora del libro de superacion femenino 'Villa Godines'\",\r\n  \"email\": \"Dianawong@villagod.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/authors",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear libro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"isbn\": \"\",\r\n  \"title\": \"Villa Godines: Como ser un buen godin\",\r\n  \"author\": { \"id\": \"0ab1b220-41de-488e-ae1c-2e15fa1c66c6\" },\r\n  \"publisher\": \"Pinguin Library\",\r\n  \"publicationDate\": \"2024-08-25\",\r\n  \"genre\": \"Superacion\",\r\n  \"pageCount\": 500,\r\n  \"price\": 30.99,\r\n  \"stock\": 100,\r\n  \"description\": \"Aprende como ser un buen godin\",\r\n  \"language\": \"Español\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pedir libro",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"isbn\": \"978-0307474728\",\r\n  \"title\": \"La casa de los espiritus\",\r\n  \"author\": {\r\n    \"id\": \"b9babe2a-2e44-44ae-8f0d-0c459d8ec480\",\r\n    \"name\": \"Isabell Allende\",\r\n    \"country\": \"Chile\",\r\n    \"birthDate\": \"1942-08-02\"\r\n  },\r\n  \"publisher\": \"Diana\",\r\n  \"publicationDate\": \"1967-05-30\",\r\n  \"genre\": \"Realismo mágico\",\r\n  \"pageCount\": 471,\r\n  \"price\": 25.99,\r\n  \"stock\": 50,\r\n  \"description\": \"Una obra maestra de la literatura hispanoamericana que narra la historia de la familia Buendía a lo largo de siete generaciones en el mítico pueblo de Macondo.\",\r\n  \"language\": \"Español\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar libro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"isbn\": \"978-0307474728\",\r\n  \"title\": \"Cien años de soledad (Edición revisada)\",\r\n  \"author\": { \"id\": \"b9babe2a-2e44-44ae-8f0d-0c459d8ec480\" },\r\n  \"publisher\": \"Diana\",\r\n  \"publicationDate\": \"1967-05-30\",\r\n  \"genre\": \"Realismo mágico\",\r\n  \"pageCount\": 480,\r\n  \"price\": 27.99,\r\n  \"stock\": 40,\r\n  \"description\": \"Nueva edicion\",\r\n  \"language\": \"Español\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/books/bdc2c396-9b7c-4cac-bf13-6d0ec02ad2e9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books",
+						"bdc2c396-9b7c-4cac-bf13-6d0ec02ad2e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Incrementar stock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/books/bdc2c396-9b7c-4cac-bf13-6d0ec02ad2e9/increase-stock",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books",
+						"bdc2c396-9b7c-4cac-bf13-6d0ec02ad2e9",
+						"increase-stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar libro",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"isbn\": \"978-0307474728\",\r\n  \"title\": \"Cien años de soledad (Edición revisada)\",\r\n  \"author\": { \"id\": \"b9babe2a-2e44-44ae-8f0d-0c459d8ec480\" },\r\n  \"publisher\": \"Diana\",\r\n  \"publicationDate\": \"1967-05-30\",\r\n  \"genre\": \"Realismo mágico\",\r\n  \"pageCount\": 480,\r\n  \"price\": 27.99,\r\n  \"stock\": 40,\r\n  \"description\": \"Nueva edicion\",\r\n  \"language\": \"Español\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/books/27c5485b-8a0a-4b91-9340-c795ea5bef51",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books",
+						"27c5485b-8a0a-4b91-9340-c795ea5bef51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Jero\",\r\n    \"lastName\" : \"Lopez\",\r\n    \"email\" : \"jlopez@gmail.com\",\r\n    \"active\" : true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear administrador",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"Administrator\",\r\n  \"name\": \"Ana\",\r\n  \"lastName\": \"Gomez\",\r\n  \"email\": \"ana.gomez@bookverse.com\",\r\n  \"phone\": \"3001112233\",\r\n  \"hireDate\": \"2025-01-01\",\r\n  \"baseSalary\": 3000000.00,\r\n  \"position\": \"ADMIN\",\r\n  \"accessLevel\": \"SUPER_ADMIN\",\r\n  \"permissions\": [\"MANAGE_BOOKS\"],\r\n  \"department\": \"Operaciones\",\r\n  \"annualBonus\": 12000000.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/employees",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear empleado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"Salesperson\",\r\n  \"name\": \"Carlos\",\r\n  \"lastName\": \"Rodriguez\",\r\n  \"email\": \"carlos.rodriguez@bookverse.com\",\r\n  \"phone\": \"3002223344\",\r\n  \"hireDate\": \"2025-02-01\",\r\n  \"baseSalary\": 2000000.00,\r\n  \"position\": \"SALESPERSON\",\r\n  \"commissionPerSale\": 50000.00,\r\n  \"salesCompleted\": 0,\r\n  \"assignedZone\": \"Norte\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/employees",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener empleados",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/api/employees",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customer\": { \"id\": \"d31f79a8-ef52-4b22-8f0f-2989fce128c4\" },\r\n  \"salesperson\": { \"id\": \"8c64128f-0c4f-402f-b1ea-cb388263c6a0\" },\r\n  \"orderDate\": \"2025-11-16T18:52:00\",\r\n  \"paymentMethod\": \"CREDIT_CARD\",\r\n  \"status\": \"CREATED\",\r\n  \"shippingAddress\": \"Calle 123 #45-67, Ciudad\",\r\n  \"items\": [\r\n    {\r\n      \"book\": { \"id\": \"93700109-b1bd-4d3e-b8c4-e7b5296c584e\" },\r\n      \"unitPrice\": 30.99\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"orders"
 					]
 				}
 			},
